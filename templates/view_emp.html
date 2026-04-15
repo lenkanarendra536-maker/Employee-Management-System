@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Employees</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, #0f172a, #1e3a8a, #0f172a);
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        /* Title */
+        h2 {
+            font-weight: 700;
+            margin-top: 30px;
+        }
+
+        /* Glass Container */
+        .glass-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Table */
+        table {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        tbody tr {
+            background: rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.01);
+        }
+
+        td, th {
+            text-align: center;
+            vertical-align: middle;
+            padding: 12px !important;
+            color: #fff;
+        }
+
+        /* Buttons */
+        .btn-edit {
+            background: #2563eb;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn-edit:hover {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc2626;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding: 12px;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+            color: #aaa;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔷 Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="me-2">
+            Employee Management System
+        </a>
+
+        <div class="ms-auto d-flex gap-2">
+            <a href="/dashboard" class="btn btn-outline-info btn-sm">Dashboard</a>
+            <a href="/add" class="btn btn-outline-light btn-sm">Add Employee</a>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+
+    </div>
+</nav>
+
+<!-- 🔷 Title -->
+<div class="container">
+    <h2>Manage Employees</h2>
+    
+</div>
+
+<!-- 🔷 Table -->
+<div class="container glass-container">
+
+    <div class="table-responsive">
+        <table class="table table-borderless align-middle">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for e in employees %}
+                <tr>
+                    <td>{{ e[0] }}</td>
+                    <td>{{ e[1] }}</td>
+                    <td>{{ e[2] }}</td>
+                    <td>₹ {{ e[3] }}</td>
+                    <td>{{ e[4] }}</td>
+                    <td>
+                        <a href="/edit/{{ e[0] }}" class="btn-edit">Edit</a>
+                        <a href="/delete/{{ e[0] }}" class="btn-delete ms-2"
+                           onclick="return confirm('Are you sure you want to delete this employee?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+<!-- 🔷 Footer -->
+<footer>
+    © 2026 Employee Management System | Corporate Admin Panel
+</footer>
+
+</body>
+</html>
