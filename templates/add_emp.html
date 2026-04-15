@@ -88,6 +88,63 @@
             color: #aaa;
             backdrop-filter: blur(10px);
         }
+
+        /* =========================
+           RESPONSIVE MEDIA QUERIES
+           ========================= */
+
+        /* Tablets */
+        @media (max-width: 992px) {
+            .glass-card {
+                padding: 25px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .ms-auto {
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .form-wrapper {
+                padding: 20px 10px;
+            }
+
+            .glass-card {
+                max-width: 100%;
+                padding: 20px;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .glass-card h2 {
+                font-size: 22px;
+            }
+
+            .form-control {
+                height: 40px;
+                font-size: 14px;
+            }
+
+            .btn-submit {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 

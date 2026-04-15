@@ -65,6 +65,78 @@
         .feature-box:hover {
             transform: translateY(-5px);
         }
+
+        /* =========================
+           RESPONSIVE MEDIA QUERIES
+           ========================= */
+
+        /* Tablets */
+        @media (max-width: 992px) {
+            .nav-link {
+                margin-left: 10px;
+            }
+
+            .about-section {
+                padding: 50px 15px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar h5 {
+                margin-top: 10px;
+            }
+
+            .ms-auto {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .nav-link {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+
+            .card {
+                padding: 20px !important;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 22px;
+            }
+
+            .about-section {
+                padding: 40px 10px;
+            }
+
+            .feature-box {
+                padding: 15px;
+            }
+
+            .feature-box h5 {
+                font-size: 16px;
+            }
+
+            .feature-box p {
+                font-size: 14px;
+            }
+
+            .text-muted {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -72,11 +144,12 @@
 <!-- ✅ Navbar -->
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="logo">
-        </a>
-
-        <h5 class="text-white mb-0">Employee Management System</h5>
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand me-2" href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="logo">
+            </a>
+            <h5 class="text-white mb-0">Employee Management System</h5>
+        </div>
 
         <div class="ms-auto">
             <a class="nav-link d-inline" href="/">Home</a>
@@ -109,21 +182,21 @@
     </div>
 
     <div class="row text-center">
-        <div class="col-md-4 mb-4">
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
             <div class="feature-box">
                 <h5>🔐 Secure Authentication</h5>
                 <p>OTP-based password reset ensures account safety.</p>
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
             <div class="feature-box">
                 <h5>📊 Employee Management</h5>
                 <p>Perform CRUD operations easily on employee records.</p>
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
             <div class="feature-box">
                 <h5>⚡ User Friendly</h5>
                 <p>Responsive design using Bootstrap for smooth experience.</p>

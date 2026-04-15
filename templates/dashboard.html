@@ -90,6 +90,87 @@
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(10px);
         }
+
+        /* =========================
+           RESPONSIVE MEDIA QUERIES
+           ========================= */
+
+        /* Tablets */
+        @media (max-width: 992px) {
+            .page-title {
+                text-align: center;
+            }
+
+            .glass-card {
+                padding: 18px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .ms-auto {
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .page-title h2 {
+                font-size: 22px;
+            }
+
+            .page-title p {
+                font-size: 14px;
+            }
+
+            .glass-card {
+                padding: 15px;
+            }
+
+            /* Table scroll fix */
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 600px;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .page-title h2 {
+                font-size: 20px;
+            }
+
+            .page-title p {
+                font-size: 13px;
+            }
+
+            .btn-custom {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            thead {
+                font-size: 11px;
+            }
+
+            td, th {
+                font-size: 12px;
+                padding: 10px !important;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 
@@ -132,36 +213,39 @@
             </div>
         </form>
 
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Salary</th>
-                    <th>Phone</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% if employees %}
-                    {% for emp in employees %}
+        <!-- Responsive Table -->
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
                     <tr>
-                        <td>{{ emp[0] }}</td>
-                        <td>{{ emp[1] }}</td>
-                        <td>{{ emp[2] }}</td>
-                        <td>₹ {{ emp[3] }}</td>
-                        <td>{{ emp[4] }}</td>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Salary</th>
+                        <th>Phone</th>
                     </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="5" class="text-danger">No records found</td>
-                    </tr>
-                {% endif %}
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
+                    {% if employees %}
+                        {% for emp in employees %}
+                        <tr>
+                            <td>{{ emp[0] }}</td>
+                            <td>{{ emp[1] }}</td>
+                            <td>{{ emp[2] }}</td>
+                            <td>₹ {{ emp[3] }}</td>
+                            <td>{{ emp[4] }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-danger">No records found</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+
+            </table>
+        </div>
 
     </div>
 </div>

@@ -13,6 +13,8 @@
             font-family: 'Segoe UI', sans-serif;
             background: radial-gradient(circle at top left, #0f172a, #1e3a8a, #0f172a);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Navbar */
@@ -49,13 +51,14 @@
 
         /* Center */
         .register-container {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 88vh;
+            padding: 20px;
         }
 
-        /* Glass Card */
+        /* Card */
         .register-card {
             width: 100%;
             max-width: 420px;
@@ -124,6 +127,63 @@
             color: #aaa;
             text-align: center;
             padding: 10px;
+        }
+
+        /* =========================
+           RESPONSIVE MEDIA QUERIES
+           ========================= */
+
+        /* Tablets */
+        @media (max-width: 992px) {
+            .register-card {
+                padding: 28px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .ms-auto {
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .register-card {
+                max-width: 100%;
+                padding: 22px;
+            }
+
+            .brand-text {
+                font-size: 16px;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .register-card h2 {
+                font-size: 22px;
+            }
+
+            .form-control, .form-select {
+                height: 42px;
+                font-size: 14px;
+            }
+
+            .btn-register {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
         }
     </style>
 </head>

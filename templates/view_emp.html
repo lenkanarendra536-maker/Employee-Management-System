@@ -82,6 +82,7 @@
             text-decoration: none;
             font-size: 13px;
             transition: 0.3s;
+            display: inline-block;
         }
 
         .btn-edit:hover {
@@ -97,6 +98,7 @@
             text-decoration: none;
             font-size: 13px;
             transition: 0.3s;
+            display: inline-block;
         }
 
         .btn-delete:hover {
@@ -112,6 +114,63 @@
             background: rgba(0,0,0,0.4);
             color: #aaa;
             backdrop-filter: blur(10px);
+        }
+
+        /* =========================
+           RESPONSIVE MEDIA QUERIES
+           ========================= */
+
+        /* Tablets */
+        @media (max-width: 992px) {
+            .glass-container {
+                padding: 15px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .ms-auto {
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .table-responsive {
+                overflow-x: auto;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            td, th {
+                font-size: 13px;
+                padding: 10px !important;
+            }
+
+            .btn-edit,
+            .btn-delete {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -139,7 +198,6 @@
 <!-- 🔷 Title -->
 <div class="container">
     <h2>Manage Employees</h2>
-    
 </div>
 
 <!-- 🔷 Table -->
