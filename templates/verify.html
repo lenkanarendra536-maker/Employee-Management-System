@@ -1,202 +1,259 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify OTP</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block title %}
+Verify OTP | Employee Management System
+{% endblock %}
 
-    <style>
-        body {
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+{% block css %}
+
+<style>
+
+    body{
+        background:#f1f5f9;
+    }
+
+    .otp-wrapper{
+
+        min-height:80vh;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        padding:20px;
+    }
+
+    .otp-card{
+
+        width:100%;
+
+        max-width:430px;
+
+        background:white;
+
+        padding:40px;
+
+        border-radius:20px;
+
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+        text-align:center;
+    }
+
+    .otp-icon{
+
+        width:75px;
+
+        height:75px;
+
+        background:#0f172a;
+
+        color:white;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        border-radius:50%;
+
+        margin:auto;
+
+        margin-bottom:20px;
+
+        font-size:30px;
+    }
+
+    .otp-title{
+
+        font-weight:700;
+
+        color:#0f172a;
+
+        margin-bottom:8px;
+    }
+
+    .otp-subtitle{
+
+        color:#64748b;
+
+        margin-bottom:30px;
+
+        font-size:15px;
+    }
+
+    .form-label{
+
+        font-weight:600;
+
+        color:#334155;
+
+        text-align:left;
+
+        display:block;
+
+        margin-bottom:8px;
+    }
+
+    .form-control{
+
+        height:50px;
+
+        border-radius:12px;
+
+        border:1px solid #cbd5e1;
+
+        padding-left:15px;
+    }
+
+    .form-control:focus{
+
+        border-color:#2563eb;
+
+        box-shadow:none;
+    }
+
+    .btn-verify{
+
+        height:50px;
+
+        border-radius:12px;
+
+        font-weight:600;
+
+        font-size:16px;
+
+        margin-top:10px;
+    }
+
+    .resend-btn{
+
+        text-decoration:none;
+
+        font-weight:500;
+
+        margin-top:10px;
+    }
+
+    .back-link{
+
+        margin-top:20px;
+
+        display:inline-block;
+
+        color:#2563eb;
+
+        text-decoration:none;
+
+        font-weight:500;
+    }
+
+    .back-link:hover{
+        text-decoration:underline;
+    }
+
+    @media(max-width:576px){
+
+        .otp-card{
+            padding:28px;
         }
 
-        /* Navbar */
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
+    }
 
-        .navbar-brand {
-            font-weight: bold;
-        }
+</style>
 
-        .nav-link:hover {
-            color: #0d6efd !important;
-        }
+{% endblock %}
 
-        /* OTP Card */
-        .otp-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
 
-        .otp-card {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            background: white;
-        }
+{% block content %}
 
-        .otp-card input {
-            height: 45px;
-            font-size: 16px;
-        }
+<div class="otp-wrapper">
 
-        .btn-dark {
-            border-radius: 25px;
-        }
+    <div class="otp-card">
 
-        /* Footer */
-        footer {
-            background-color: #212529;
-            color: #fff;
-            padding: 15px 0;
-            margin-top: auto;
-        }
+        <!-- ICON -->
 
-        footer a {
-            color: #adb5bd;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            color: white;
-        }
-
-        /* =========================
-           RESPONSIVE MEDIA QUERIES
-           ========================= */
-
-        /* Tablets */
-        @media (max-width: 992px) {
-            .otp-card {
-                padding: 25px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .otp-card {
-                max-width: 100%;
-                padding: 20px;
-            }
-
-            .ms-3 {
-                margin-top: 10px;
-            }
-
-            h3.text-white {
-                font-size: 18px;
-            }
-        }
-
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .otp-card h3 {
-                font-size: 22px;
-            }
-
-            .otp-card input {
-                height: 40px;
-                font-size: 14px;
-            }
-
-            .btn-dark {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            footer {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<!-- 🔷 Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-
-        <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="40" height="40" class="me-2">
-        </a>
-
-        <h3 class="text-white mb-0">Employee Management System</h3>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav ms-3">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-            </ul>
+        <div class="otp-icon">
+            🔐
         </div>
 
-    </div>
-</nav>
+        <!-- TITLE -->
 
-<!-- 🔷 OTP Card -->
-<div class="container otp-wrapper">
+        <h2 class="otp-title">
+            Verify OTP
+        </h2>
 
-    <div class="card p-4 otp-card">
+        <p class="otp-subtitle">
+            Enter the OTP sent to your registered email
+        </p>
 
-        <h3 class="text-center mb-3">Verify OTP</h3>
+        <!-- ERROR MESSAGE -->
 
         {% if msg %}
+
         <div class="alert alert-danger text-center">
+
             {{ msg }}
+
         </div>
+
         {% endif %}
 
+        <!-- FORM -->
+
         <form method="POST">
-            <input type="text" name="otp" class="form-control mb-3" placeholder="Enter OTP" required>
 
-            <button class="btn btn-dark w-100 mb-2">Verify</button>
+            <!-- OTP -->
 
-            <button type="submit" name="resend" value="1" class="btn btn-link w-100">
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Enter OTP
+                </label>
+
+                <input
+                    type="text"
+                    name="otp"
+                    class="form-control"
+                    placeholder="Enter OTP"
+                    required
+                >
+
+            </div>
+
+            <!-- VERIFY BUTTON -->
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100 btn-verify"
+            >
+                Verify OTP
+            </button>
+
+            <!-- RESEND -->
+
+            <button
+                type="submit"
+                name="resend"
+                value="1"
+                class="btn btn-link w-100 resend-btn"
+            >
                 Didn't receive OTP? Resend
             </button>
+
         </form>
+
+        <!-- BACK -->
+
+        <a href="/login" class="back-link">
+            ← Back to Login
+        </a>
 
     </div>
 
 </div>
 
-<!-- 🔷 Footer -->
-<footer class="text-center">
-    <div class="container">
-        <p class="mb-1">© 2026 Employee Management System</p>
-        <div>
-            <a href="/">Home</a> |
-            <a href="/about">About</a> |
-            <a href="/contact">Contact</a>
-        </div>
-    </div>
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+{% endblock %}

@@ -1,195 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block title %}
+Contact Us | Employee Management System
+{% endblock %}
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #141e30, #243b55);
-            min-height: 100vh;
+{% block css %}
+
+<style>
+
+    body{
+        background:#f1f5f9;
+    }
+
+    .contact-wrapper{
+
+        min-height:80vh;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        padding:20px;
+    }
+
+    .contact-card{
+
+        width:100%;
+
+        max-width:550px;
+
+        background:white;
+
+        padding:40px;
+
+        border-radius:20px;
+
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .contact-icon{
+
+        width:75px;
+
+        height:75px;
+
+        background:#0f172a;
+
+        color:white;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        border-radius:50%;
+
+        margin:auto;
+
+        margin-bottom:20px;
+
+        font-size:30px;
+    }
+
+    .contact-title{
+
+        text-align:center;
+
+        font-weight:700;
+
+        color:#0f172a;
+
+        margin-bottom:8px;
+    }
+
+    .contact-subtitle{
+
+        text-align:center;
+
+        color:#64748b;
+
+        margin-bottom:30px;
+
+        font-size:15px;
+    }
+
+    .form-label{
+
+        font-weight:600;
+
+        color:#334155;
+    }
+
+    .form-control{
+
+        border-radius:12px;
+
+        border:1px solid #cbd5e1;
+
+        padding:12px 15px;
+    }
+
+    .form-control:focus{
+
+        border-color:#2563eb;
+
+        box-shadow:none;
+    }
+
+    textarea.form-control{
+
+        min-height:120px;
+
+        resize:none;
+    }
+
+    .btn-send{
+
+        height:50px;
+
+        border-radius:12px;
+
+        font-weight:600;
+
+        font-size:16px;
+
+        margin-top:10px;
+    }
+
+    @media(max-width:576px){
+
+        .contact-card{
+            padding:28px;
         }
 
-        /* Navbar */
-        .navbar {
-            background-color: rgba(0,0,0,0.9);
-        }
+    }
 
-        .navbar-brand img {
-            height: 40px;
-        }
+</style>
 
-        .nav-link {
-            color: white !important;
-            margin-right: 10px;
-        }
+{% endblock %}
 
-        .nav-link:hover {
-            color: #0d6efd !important;
-        }
 
-        /* Contact Section */
-        .contact-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-            padding: 20px;
-        }
+{% block content %}
 
-        .contact-card {
-            width: 100%;
-            max-width: 500px;
-            padding: 30px;
-            border-radius: 15px;
-            background: #ffffff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+<div class="contact-wrapper">
 
-        .contact-card h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            height: 45px;
-        }
-
-        textarea.form-control {
-            height: 100px;
-        }
-
-        .btn-send {
-            border-radius: 25px;
-            font-weight: bold;
-            padding: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: rgba(0,0,0,0.9);
-            color: #aaa;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        /* =========================
-           RESPONSIVE MEDIA QUERIES
-           ========================= */
-
-        /* Tablets */
-        @media (max-width: 992px) {
-            .nav-link {
-                margin-right: 8px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .ms-auto {
-                width: 100%;
-                margin-top: 10px;
-            }
-
-            .nav-link {
-                display: block;
-                margin: 5px 0;
-            }
-
-            h3 {
-                font-size: 20px;
-                margin-top: 10px;
-            }
-
-            .contact-card {
-                padding: 20px;
-            }
-        }
-
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .contact-card h2 {
-                font-size: 22px;
-            }
-
-            .form-control {
-                height: 40px;
-                font-size: 14px;
-            }
-
-            textarea.form-control {
-                height: 90px;
-            }
-
-            .btn-send {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            footer {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<!-- 🔷 Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="logo">
-        </a>
-
-        <h3 class="text-white mb-0">Employee Management System</h3>
-
-        <div class="ms-auto">
-            <a class="nav-link d-inline" href="/">Home</a>
-            <a class="nav-link d-inline" href="/about">About</a>
-            <a class="nav-link d-inline" href="/contact">Contact</a>
-        </div>
-    </div>
-</nav>
-
-<!-- 🔷 Contact Form -->
-<div class="container contact-container">
     <div class="contact-card">
-        <h2>Contact Us</h2>
 
-        <form method="post">
-            <input type="text" class="form-control mb-3" placeholder="Full Name" name="name" required>
+        <!-- ICON -->
 
-            <input type="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
+        <div class="contact-icon">
+            📩
+        </div>
 
-            <input type="tel" class="form-control mb-3" placeholder="Phone Number" name="phone" required>
+        <!-- TITLE -->
 
-            <textarea class="form-control mb-3" name="message" placeholder="Your Message" required></textarea>
+        <h2 class="contact-title">
+            Contact Us
+        </h2>
 
-            <button class="btn btn-primary w-100 btn-send">Send Message</button>
+        <p class="contact-subtitle">
+            Have questions? Send us your message
+        </p>
+
+        <!-- FORM -->
+
+        <form method="POST">
+
+            <!-- NAME -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter your full name"
+                    name="name"
+                    required
+                >
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Enter your email"
+                    name="email"
+                    required
+                >
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="Enter your phone number"
+                    name="phone"
+                    required
+                >
+
+            </div>
+
+            <!-- MESSAGE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Message
+                </label>
+
+                <textarea
+                    class="form-control"
+                    name="message"
+                    placeholder="Write your message here..."
+                    required
+                ></textarea>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100 btn-send"
+            >
+                Send Message
+            </button>
+
         </form>
+
     </div>
+
 </div>
 
-<!-- 🔷 Footer -->
-<footer>
-    © 2026 Employee Management System
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+{% endblock %}

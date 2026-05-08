@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}
+View Employee | Employee Management System
+{% endblock %}
+
+{% block css %}
+
+<style>
+    body {
+        background: #f1f5f9;
+    }
+
+    .view-wrapper {
+
+        min-height: 80vh;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        padding: 20px;
+    }
+
+    .view-card {
+
+        width: 100%;
+
+        max-width: 550px;
+
+        background: white;
+
+        border-radius: 20px;
+
+        padding: 40px;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .view-icon {
+
+        width: 80px;
+
+        height: 80px;
+
+        background: #0f172a;
+
+        color: white;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        border-radius: 50%;
+
+        margin: auto;
+
+        margin-bottom: 20px;
+
+        font-size: 34px;
+    }
+
+    .view-title {
+
+        text-align: center;
+
+        font-weight: 700;
+
+        color: #0f172a;
+
+        margin-bottom: 8px;
+    }
+
+    .view-subtitle {
+
+        text-align: center;
+
+        color: #64748b;
+
+        margin-bottom: 35px;
+    }
+
+    .info-box {
+
+        background: #f8fafc;
+
+        border: 1px solid #e2e8f0;
+
+        border-radius: 14px;
+
+        padding: 18px 20px;
+
+        margin-bottom: 18px;
+    }
+
+    .info-label {
+
+        font-size: 14px;
+
+        color: #64748b;
+
+        margin-bottom: 5px;
+
+        font-weight: 600;
+    }
+
+    .info-value {
+
+        font-size: 18px;
+
+        color: #0f172a;
+
+        font-weight: 600;
+    }
+
+    .salary {
+
+        color: #16a34a;
+    }
+
+    .button-group {
+
+        display: flex;
+
+        gap: 15px;
+
+        margin-top: 25px;
+    }
+
+    .btn-custom {
+
+        flex: 1;
+
+        height: 48px;
+
+        border-radius: 12px;
+
+        font-weight: 600;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+    @media(max-width:576px) {
+
+        .view-card {
+            padding: 28px;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+    }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="view-wrapper">
+
+    <div class="view-card">
+
+        <!-- ICON -->
+
+        <div class="view-icon">
+            👨‍💼
+        </div>
+
+        <!-- TITLE -->
+
+        <h2 class="view-title">
+            Employee Details
+        </h2>
+
+        <p class="view-subtitle">
+            View complete employee information
+        </p>
+
+        <!-- EMPLOYEE ID -->
+
+        <div class="info-box">
+
+            <div class="info-label">
+                Employee ID
+            </div>
+
+            <div class="info-value">
+                {{ employee[0] }}
+            </div>
+
+        </div>
+
+        <!-- NAME -->
+
+        <div class="info-box">
+
+            <div class="info-label">
+                Employee Name
+            </div>
+
+            <div class="info-value">
+                {{ employee[1] }}
+            </div>
+
+        </div>
+
+        <!-- DEPARTMENT -->
+
+        <div class="info-box">
+
+            <div class="info-label">
+                Department
+            </div>
+
+            <div class="info-value">
+                {{ employee[2] }}
+            </div>
+
+        </div>
+
+        <!-- SALARY -->
+
+        <div class="info-box">
+
+            <div class="info-label">
+                Salary
+            </div>
+
+            <div class="info-value salary">
+                ₹ {{ employee[3] }}
+            </div>
+
+        </div>
+
+        <!-- PHONE -->
+
+        <div class="info-box">
+
+            <div class="info-label">
+                Phone Number
+            </div>
+
+            <div class="info-value">
+                {{ employee[4] }}
+            </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="button-group">
+
+            <a href="/edit/{{ employee[0] }}" class="btn btn-primary btn-custom">
+                Edit Employee
+            </a>
+
+            <a href="/dashboard" class="btn btn-secondary btn-custom">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

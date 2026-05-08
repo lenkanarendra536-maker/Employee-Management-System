@@ -1,250 +1,304 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Employees</title>
+{% block title %}
+Manage Employees | Employee Management System
+{% endblock %}
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block css %}
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            background: radial-gradient(circle at top left, #0f172a, #1e3a8a, #0f172a);
-            color: #fff;
+<style>
+
+    body{
+        background:#f1f5f9;
+    }
+
+    .manage-header{
+        margin-bottom:25px;
+    }
+
+    .manage-title{
+
+        font-weight:700;
+
+        color:#0f172a;
+
+        margin-bottom:5px;
+    }
+
+    .manage-subtitle{
+
+        color:#64748b;
+
+        margin-bottom:0;
+    }
+
+    .manage-card{
+
+        background:white;
+
+        border-radius:18px;
+
+        padding:25px;
+
+        box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    table{
+        margin-top:10px;
+    }
+
+    thead{
+
+        background:#0f172a;
+
+        color:white;
+    }
+
+    thead th{
+
+        padding:14px !important;
+
+        font-size:14px;
+
+        font-weight:600;
+
+        border:none !important;
+    }
+
+    tbody td{
+
+        padding:14px !important;
+
+        vertical-align:middle;
+
+        border-bottom:1px solid #e2e8f0;
+    }
+
+    tbody tr:hover{
+        background:#f8fafc;
+    }
+
+    .salary-text{
+
+        color:#16a34a;
+
+        font-weight:600;
+    }
+
+    .action-buttons{
+        display:flex;
+        gap:10px;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .btn-edit{
+
+        background:#2563eb;
+
+        color:white;
+
+        padding:8px 14px;
+
+        border-radius:10px;
+
+        text-decoration:none;
+
+        font-size:14px;
+
+        font-weight:500;
+
+        transition:0.3s;
+    }
+
+    .btn-edit:hover{
+
+        background:#1d4ed8;
+
+        color:white;
+    }
+
+    .btn-delete{
+
+        background:#dc2626;
+
+        color:white;
+
+        padding:8px 14px;
+
+        border-radius:10px;
+
+        text-decoration:none;
+
+        font-size:14px;
+
+        font-weight:500;
+
+        transition:0.3s;
+    }
+
+    .btn-delete:hover{
+
+        background:#b91c1c;
+
+        color:white;
+    }
+
+    .empty-row{
+
+        text-align:center;
+
+        color:red;
+
+        font-weight:600;
+    }
+
+    @media(max-width:768px){
+
+        .manage-card{
+            padding:18px;
         }
 
-        /* Navbar */
-        .navbar {
-            background: rgba(10, 15, 30, 0.85);
-            backdrop-filter: blur(10px);
+        .table-responsive{
+            overflow-x:auto;
         }
 
-        .navbar-brand img {
-            height: 40px;
+        table{
+            min-width:850px;
         }
 
-        /* Title */
-        h2 {
-            font-weight: 700;
-            margin-top: 30px;
-        }
+    }
 
-        /* Glass Container */
-        .glass-container {
-            margin-top: 30px;
-            padding: 20px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+</style>
 
-        /* Table */
-        table {
-            border-radius: 12px;
-            overflow: hidden;
-        }
+{% endblock %}
 
-        thead {
-            background: rgba(0,0,0,0.6);
-            color: white;
-            text-transform: uppercase;
-            font-size: 13px;
-        }
 
-        tbody tr {
-            background: rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
+{% block content %}
 
-        tbody tr:hover {
-            background: rgba(255,255,255,0.15);
-            transform: scale(1.01);
-        }
+<!-- HEADER -->
 
-        td, th {
-            text-align: center;
-            vertical-align: middle;
-            padding: 12px !important;
-            color: #fff;
-        }
+<div class="manage-header">
 
-        /* Buttons */
-        .btn-edit {
-            background: #2563eb;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 13px;
-            transition: 0.3s;
-            display: inline-block;
-        }
+    <h2 class="manage-title">
+        Manage Employees
+    </h2>
 
-        .btn-edit:hover {
-            background: #1d4ed8;
-            color: white;
-        }
+    <p class="manage-subtitle">
+        View, edit, and manage employee records
+    </p>
 
-        .btn-delete {
-            background: #dc2626;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 13px;
-            transition: 0.3s;
-            display: inline-block;
-        }
-
-        .btn-delete:hover {
-            background: #b91c1c;
-            color: white;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 50px;
-            padding: 12px;
-            text-align: center;
-            background: rgba(0,0,0,0.4);
-            color: #aaa;
-            backdrop-filter: blur(10px);
-        }
-
-        /* =========================
-           RESPONSIVE MEDIA QUERIES
-           ========================= */
-
-        /* Tablets */
-        @media (max-width: 992px) {
-            .glass-container {
-                padding: 15px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .ms-auto {
-                width: 100%;
-                margin-top: 10px;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            h2 {
-                font-size: 22px;
-            }
-
-            .table-responsive {
-                overflow-x: auto;
-            }
-        }
-
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 20px;
-            }
-
-            td, th {
-                font-size: 13px;
-                padding: 10px !important;
-            }
-
-            .btn-edit,
-            .btn-delete {
-                font-size: 12px;
-                padding: 5px 10px;
-            }
-
-            footer {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<!-- 🔷 Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
-
-        <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="me-2">
-            Employee Management System
-        </a>
-
-        <div class="ms-auto d-flex gap-2">
-            <a href="/dashboard" class="btn btn-outline-info btn-sm">Dashboard</a>
-            <a href="/add" class="btn btn-outline-light btn-sm">Add Employee</a>
-            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
-        </div>
-
-    </div>
-</nav>
-
-<!-- 🔷 Title -->
-<div class="container">
-    <h2>Manage Employees</h2>
 </div>
 
-<!-- 🔷 Table -->
-<div class="container glass-container">
+
+<!-- TABLE CARD -->
+
+<div class="manage-card">
 
     <div class="table-responsive">
-        <table class="table table-borderless align-middle">
+
+        <table class="table align-middle">
 
             <thead>
+
                 <tr>
+
                     <th>ID</th>
+
                     <th>Name</th>
+
                     <th>Department</th>
+
                     <th>Salary</th>
+
                     <th>Phone</th>
-                    <th>Action</th>
+
+                    <th>Actions</th>
+
                 </tr>
+
             </thead>
 
             <tbody>
-                {% for e in employees %}
-                <tr>
-                    <td>{{ e[0] }}</td>
-                    <td>{{ e[1] }}</td>
-                    <td>{{ e[2] }}</td>
-                    <td>₹ {{ e[3] }}</td>
-                    <td>{{ e[4] }}</td>
-                    <td>
-                        <a href="/edit/{{ e[0] }}" class="btn-edit">Edit</a>
-                        <a href="/delete/{{ e[0] }}" class="btn-delete ms-2"
-                           onclick="return confirm('Are you sure you want to delete this employee?');">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
+
+                {% if employees %}
+
+                    {% for e in employees %}
+
+                    <tr>
+
+                        <td>
+                            {{ e[0] }}
+                        </td>
+
+                        <td>
+                            {{ e[1] }}
+                        </td>
+
+                        <td>
+                            {{ e[2] }}
+                        </td>
+
+                        <td class="salary-text">
+                            ₹ {{ e[3] }}
+                        </td>
+
+                        <td>
+                            {{ e[4] }}
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <!-- EDIT -->
+
+                                <a
+                                    href="/edit/{{ e[0] }}"
+                                    class="btn-edit"
+                                >
+                                    Edit
+                                </a>
+
+                                <!-- DELETE -->
+
+                                <a
+                                    href="/delete/{{ e[0] }}"
+                                    class="btn-delete"
+
+                                    onclick="return confirm('Are you sure you want to delete this employee?');"
+                                >
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="6" class="empty-row">
+
+                            No Employee Records Found
+
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
             </tbody>
 
         </table>
+
     </div>
 
 </div>
 
-<!-- 🔷 Footer -->
-<footer>
-    © 2026 Employee Management System | Corporate Admin Panel
-</footer>
-
-</body>
-</html>
+{% endblock %}

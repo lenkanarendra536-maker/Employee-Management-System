@@ -1,159 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block title %}
+Reset Password | Employee Management System
+{% endblock %}
 
-    <style>
-        body {
-            background: linear-gradient(to right, #667eea, #764ba2);
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+{% block css %}
+
+<style>
+
+    body{
+        background:#f1f5f9;
+    }
+
+    .reset-wrapper{
+        min-height:80vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .reset-card{
+        width:100%;
+        max-width:430px;
+        background:white;
+        padding:40px;
+        border-radius:20px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        text-align:center;
+    }
+
+    .reset-icon{
+        width:75px;
+        height:75px;
+        background:#0f172a;
+        color:white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border-radius:50%;
+        margin:auto;
+        margin-bottom:20px;
+        font-size:30px;
+    }
+
+    .reset-title{
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:8px;
+    }
+
+    .reset-subtitle{
+        color:#64748b;
+        margin-bottom:30px;
+        font-size:15px;
+    }
+
+    .form-label{
+        font-weight:600;
+        color:#334155;
+        text-align:left;
+        display:block;
+        margin-bottom:8px;
+    }
+
+    .form-control{
+        height:50px;
+        border-radius:12px;
+        border:1px solid #cbd5e1;
+        padding-left:15px;
+    }
+
+    .form-control:focus{
+        border-color:#2563eb;
+        box-shadow:none;
+    }
+
+    .btn-update{
+        height:50px;
+        border-radius:12px;
+        font-weight:600;
+        font-size:16px;
+        margin-top:10px;
+    }
+
+    .back-link{
+        margin-top:20px;
+        display:inline-block;
+        color:#2563eb;
+        text-decoration:none;
+        font-weight:500;
+    }
+
+    .back-link:hover{
+        text-decoration:underline;
+    }
+
+    @media(max-width:576px){
+        .reset-card{
+            padding:28px;
         }
+    }
 
-        /* Navbar */
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
+</style>
 
-        .navbar-brand {
-            font-weight: bold;
-        }
+{% endblock %}
 
-        .nav-link:hover {
-            color: #0d6efd !important;
-        }
 
-        /* Card */
-        .reset-card {
-            margin-top: 80px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            background: white;
-            width: 100%;
-        }
+{% block content %}
 
-        .reset-card input {
-            height: 45px;
-            font-size: 16px;
-        }
+<div class="reset-wrapper">
 
-        .btn-dark {
-            border-radius: 25px;
-        }
+    <div class="reset-card">
 
-        /* Layout fix */
-        .page-wrapper {
-            flex: 1;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #212529;
-            color: #fff;
-            padding: 15px 0;
-            margin-top: auto;
-        }
-
-        footer a {
-            color: #adb5bd;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            color: white;
-        }
-
-        /* =========================
-           RESPONSIVE MEDIA QUERIES
-           ========================= */
-
-        /* Tablets */
-        @media (max-width: 992px) {
-            .reset-card {
-                margin-top: 60px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .reset-card {
-                margin-top: 40px;
-                padding: 20px;
-            }
-
-            h3.text-white {
-                font-size: 18px;
-                margin-top: 10px;
-            }
-        }
-
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .reset-card h3 {
-                font-size: 22px;
-            }
-
-            .reset-card input {
-                height: 40px;
-                font-size: 14px;
-            }
-
-            .btn-dark {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            footer {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<!-- 🔷 Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-
-        <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="40" height="40" class="me-2">
-        </a>
-
-        <h3 class="text-white mb-0">Employee Management System</h3>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav ms-3">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-            </ul>
+        <div class="reset-icon">
+            🔑
         </div>
 
-    </div>
-</nav>
+        <h2 class="reset-title">
+            Reset Password
+        </h2>
 
-<!-- 🔷 Reset Password Card -->
-<div class="container page-wrapper">
-    <div class="card p-4 mx-auto reset-card" style="max-width:400px;">
-        <h3 class="text-center mb-3">Reset Password</h3>
+        <p class="reset-subtitle">
+            Enter your new password to update your account
+        </p>
 
         {% if msg %}
         <div class="alert alert-danger text-center">
@@ -162,27 +132,38 @@
         {% endif %}
 
         <form method="POST">
-            <input type="password" name="password" class="form-control mb-3" placeholder="New Password" required>
 
-            <button class="btn btn-dark w-100">Update Password</button>
+            <div class="mb-3">
+
+                <label class="form-label">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter new password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100 btn-update"
+            >
+                Update Password
+            </button>
+
         </form>
+
+        <a href="/login" class="back-link">
+            ← Back to Login
+        </a>
+
     </div>
+
 </div>
 
-<!-- 🔷 Footer -->
-<footer class="text-center">
-    <div class="container">
-        <p class="mb-1">© 2026 Employee Management System</p>
-        <div>
-            <a href="/">Home</a> |
-            <a href="/about">About</a> |
-            <a href="/contact">Contact</a>
-        </div>
-    </div>
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+{% endblock %}

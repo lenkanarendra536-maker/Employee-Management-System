@@ -1,194 +1,277 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Employee</title>
+{% block title %}
+Edit Employee | Employee Management System
+{% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block css %}
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #2c3e50, #4ca1af);
-            min-height: 100vh;
+<style>
+
+    body{
+        background:#f1f5f9;
+    }
+
+    .edit-wrapper{
+
+        min-height:80vh;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        padding:20px;
+    }
+
+    .edit-card{
+
+        width:100%;
+
+        max-width:500px;
+
+        background:white;
+
+        padding:40px;
+
+        border-radius:20px;
+
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .edit-icon{
+
+        width:75px;
+
+        height:75px;
+
+        background:#0f172a;
+
+        color:white;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        border-radius:50%;
+
+        margin:auto;
+
+        margin-bottom:20px;
+
+        font-size:30px;
+    }
+
+    .edit-title{
+
+        text-align:center;
+
+        font-weight:700;
+
+        color:#0f172a;
+
+        margin-bottom:8px;
+    }
+
+    .edit-subtitle{
+
+        text-align:center;
+
+        color:#64748b;
+
+        margin-bottom:30px;
+
+        font-size:15px;
+    }
+
+    .form-label{
+
+        font-weight:600;
+
+        color:#334155;
+    }
+
+    .form-control{
+
+        height:50px;
+
+        border-radius:12px;
+
+        border:1px solid #cbd5e1;
+    }
+
+    .form-control:focus{
+
+        border-color:#2563eb;
+
+        box-shadow:none;
+    }
+
+    .readonly-input{
+
+        background:#e2e8f0 !important;
+
+        cursor:not-allowed;
+    }
+
+    .btn-update{
+
+        height:50px;
+
+        border-radius:12px;
+
+        font-weight:600;
+
+        font-size:16px;
+
+        margin-top:10px;
+    }
+
+    @media(max-width:576px){
+
+        .edit-card{
+            padding:28px;
         }
 
-        /* Navbar */
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.9);
-        }
+    }
 
-        .navbar-brand img {
-            height: 40px;
-        }
+</style>
 
-        .nav-link {
-            color: white !important;
-            margin-right: 10px;
-        }
+{% endblock %}
 
-        .nav-link:hover {
-            color: #0d6efd !important;
-        }
 
-        /* Form Section */
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-            padding: 20px;
-        }
+{% block content %}
 
-        .form-card {
-            width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 15px;
-            background: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+<div class="edit-wrapper">
 
-        .form-card h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
+    <div class="edit-card">
 
-        .form-control {
-            border-radius: 10px;
-            height: 45px;
-        }
+        <!-- ICON -->
 
-        .btn-update {
-            border-radius: 25px;
-            font-weight: bold;
-            padding: 10px;
-        }
+        <div class="edit-icon">
+            ✏️
+        </div>
 
-        /* Footer */
-        footer {
-            background-color: rgba(0, 0, 0, 0.9);
-            color: #aaa;
-            text-align: center;
-            padding: 10px 0;
-        }
+        <!-- TITLE -->
 
-        /* =========================
-           RESPONSIVE MEDIA QUERIES
-           ========================= */
+        <h2 class="edit-title">
+            Edit Employee
+        </h2>
 
-        /* Tablets */
-        @media (max-width: 992px) {
-            .form-card {
-                padding: 25px;
-            }
-        }
+        <p class="edit-subtitle">
+            Update employee details and save changes
+        </p>
 
-        /* Mobile */
-        @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        <!-- FORM -->
 
-            .ms-auto {
-                width: 100%;
-                margin-top: 10px;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
+        <form action="/update" method="POST">
 
-            .form-card {
-                max-width: 100%;
-                padding: 20px;
-            }
+            <!-- EMPLOYEE ID -->
 
-            h3.text-white {
-                font-size: 18px;
-                margin-top: 10px;
-            }
-        }
+            <div class="mb-3">
 
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .form-card h2 {
-                font-size: 22px;
-            }
+                <label class="form-label">
+                    Employee ID
+                </label>
 
-            .form-control {
-                height: 40px;
-                font-size: 14px;
-            }
+                <input
+                    type="text"
+                    class="form-control readonly-input"
+                    name="eid"
+                    value="{{ e[0] }}"
+                    readonly
+                >
 
-            .btn-update {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            footer {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- 🔷 Navbar -->
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="/dashboard">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="logo">
-            </a>
-
-            <h3 class="text-white mb-0">Employee Management System</h3>
-
-            <div class="ms-auto">
-                <a href="/dashboard" class="btn btn-outline-info">Dashboard</a>
-                <a href="/add" class="btn btn-outline-light me-2">Add Employee</a>
-                <a href="/logout" class="btn btn-danger">Logout</a>
             </div>
-        </div>
-    </nav>
 
-    <!-- 🔷 Edit Form -->
-    <div class="container form-container">
-        <div class="form-card">
-            <h2>Edit Employee</h2>
+            <!-- EMPLOYEE NAME -->
 
-            <form action="/update" method="post">
+            <div class="mb-3">
 
-                <input type="text" class="form-control mb-3" name="eid" value="{{ e[0] }}" readonly>
+                <label class="form-label">
+                    Employee Name
+                </label>
 
-                <input type="text" class="form-control mb-3" name="ename" value="{{ e[1] }}" required>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="ename"
+                    value="{{ e[1] }}"
+                    required
+                >
 
-                <input type="text" class="form-control mb-3" name="edept" value="{{ e[2] }}" required>
+            </div>
 
-                <input type="number" class="form-control mb-3" name="esalary" value="{{ e[3] }}" required>
+            <!-- DEPARTMENT -->
 
-                <input type="tel" class="form-control mb-3" name="ephone" value="{{ e[4] }}" required>
+            <div class="mb-3">
 
-                <button type="submit" class="btn btn-primary w-100 btn-update">
-                    Update Employee
-                </button>
+                <label class="form-label">
+                    Department
+                </label>
 
-            </form>
-        </div>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="edept"
+                    value="{{ e[2] }}"
+                    required
+                >
+
+            </div>
+
+            <!-- SALARY -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Salary
+                </label>
+
+                <input
+                    type="number"
+                    class="form-control"
+                    name="esalary"
+                    value="{{ e[3] }}"
+                    required
+                >
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    class="form-control"
+                    name="ephone"
+                    value="{{ e[4] }}"
+                    required
+                >
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100 btn-update"
+            >
+                Update Employee
+            </button>
+
+        </form>
+
     </div>
 
-    <!-- 🔷 Footer -->
-    <footer>
-        © 2026 Employee Management System
-    </footer>
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+{% endblock %}
